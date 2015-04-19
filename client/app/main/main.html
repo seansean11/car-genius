@@ -13,7 +13,25 @@
         <span class="radio-slide__slider"></span>
       </div>
       <div class="search-inputs">
-        <typeahead items="cities" model="query.city" class="input-city"></typeahead>
+        <ui-select ng-model="query.city">
+          <ui-select-match>{{$select.selected.pretty}}</ui-select-match>
+          <ui-select-choices group-by="groupFind" repeat="city in cities | filter: $select.search">
+              <div ng-bind-html="value.name | highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+        <!-- <input ng-class="{'filled': model.length}"
+        ng-model="model.city"
+        ng-change="filterItems(items, model)"
+        class="input-city__input" type="text" name="city" id="city" autocomplete="off">
+        <label class="input-city__label" for="city"><span>City</span></label>
+        <ul class="typeahead">
+          <li typeahead-item="city"
+          ng-repeat="city in itemsFiltered"
+          class="typeahead-item">
+            <span class="typeahead-item__state">{{ city.state }}</span>
+            <span class="typeahead-item__pretty"><span class="icon-location"></span>{{ city.pretty }}</span>
+          </li>
+        </ul> -->
         <div class="input-query">
           <input ng-class="{'filled': query.query.length}" class="input-query__input" type="query" name="query" id="query" ng-model="query.query">
           <label class="input-query__label" for="query"><span>Search</span></label>

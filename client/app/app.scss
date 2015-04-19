@@ -1,0 +1,181 @@
+// --------------------------------------------------
+// SASS base partials
+// --------------------------------------------------
+@import "../bower_components/susy/sass/susy";
+@import "../assets/scss/reset";
+@import "../assets/scss/variables";
+@import "../assets/scss/placeholders";
+@import "../assets/scss/mixins";
+@import "../assets/scss/fonts";
+@import "../assets/scss/typography";
+@import "../assets/scss/elements";
+
+
+// --------------------------------------------------
+// Grid System
+// --------------------------------------------------
+
+/* =Box Sizing
+----------------------------------------------- */
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+/* =Susy Settings
+----------------------------------------------- */
+$susy: (
+  columns: 12,  
+  gutters: 1/4,
+  container: 1160px,
+  global-box-sizing: border-box
+);
+
+/* =Utility Styles
+----------------------------------------------- */
+.wrap {
+	@include container();
+}
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+.sr-only {
+	@extend %visuallyhidden;
+}
+
+/* =Hero
+----------------------------------------------- */
+.hero-unit {
+    padding: 30px 15px;
+    color: #F5F5F5;
+    text-align: center;
+    background-image: linear-gradient( 0deg, $color-blue-dark, $color-blue-light );
+    position: relative;
+
+    &:before {
+    	content:'';
+    	position: absolute;
+    	top: 0; right: 0; bottom: 0; left: 0;
+    	background: url('../assets/images/car-pattern.png') transparent;
+    }
+}
+
+/* =Navigation
+----------------------------------------------- */
+.navbar {
+	border-bottom: 2px solid rgba(white, .3);
+	padding: 1em .3em 1.5em;
+	@include clearfix();
+	position: relative;
+}
+
+.logo {
+	@extend %ir;
+	background: url('../assets/images/car-genius.svg') no-repeat;
+	display: block;
+	width: 100px; height: 50px;
+	float: left;
+}
+
+.nav {
+	@extend %menu-zero;
+
+	&--left {
+		float: left;
+	}
+
+	&--right {
+		float: right;
+
+		.hero-unit & {
+			margin-top: .3em;
+		}
+	}
+
+	&__item {
+		display: inline-block;
+		vertical-align: middle;
+		margin-left: 3em;
+		text-transform: uppercase;
+		@include font-size(1.3);
+		font-family: $font-reg;
+
+		&:first-child {
+			margin-left: 0;
+		}
+
+		a {
+			text-decoration: none;
+			color: #fff;
+			display: inline-block;
+		}
+	}
+}
+
+/* =Buttons
+----------------------------------------------- */
+.btn {
+	display: inline-block;
+	padding: 1em 1.7em;
+	position: relative;
+	overflow: hidden;
+	transition: color 0.1s;
+	z-index: 1;
+
+	&:before {
+		content:'';
+		width: 120%; height: 200%;
+		position: absolute;
+		left: -10%; top: -50%;
+		border-radius: 50%;
+		transform: scale(0);
+		transition: transform 0.2s ;
+		z-index: -1;
+	}
+
+	&:hover:before {
+		transform: scale(1);
+	}
+
+	&--trans {
+		background-color: $color-blue-trans;
+
+		&:before {
+			background-color: #fff;
+		}
+
+		&:hover {
+			color: $color-blue;
+		}
+	}
+
+	&--white {
+		background-color: rgba(white, 0.7);
+
+		&:before {
+			background-color: #fff;
+		}
+
+		&:hover {
+			color: $color-blue;
+		}
+	}
+
+}
+
+// --------------------------------------------------
+// Component Styles Inected By Grunt
+// --------------------------------------------------
+// injector
+@import 'account/login/login.scss';
+@import 'admin/admin.scss';
+@import 'main/main.scss';
+@import 'search/search.scss';
+@import 'typeahead/typeahead.scss';
+// endinjector

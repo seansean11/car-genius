@@ -1,0 +1,33 @@
+<header class="hero-unit" id="banner">
+  <div ng-include="'components/navbar/navbar.html'"></div>
+  <div class="hero-content wrap">
+    <h1>Buy used cars with confidence.</h1>
+    <form ng-submit="go()" name="search">
+      <div class="radio-slide">
+        <input class="radio-slide__input" id="cta" type="radio" value="cta" name="forSale" checked>
+        <label class="radio-slide__label" for="cta">All</label>
+        <input class="radio-slide__input" id="cto" type="radio" value="cto" name="forSale">
+        <label class="radio-slide__label" for="cto">Owner</label>
+        <input class="radio-slide__input" id="ctd" type="radio" value="ctd" name="forSale">
+        <label class="radio-slide__label" for="ctd">Dealer</label>
+        <span class="radio-slide__slider"></span>
+      </div>
+      <div class="search-inputs">
+        <typeahead items="cities" model="query.city" class="input-city"></typeahead>
+        <div class="input-query">
+          <input ng-class="{'filled': query.query.length}" class="input-query__input" type="query" name="query" id="query" ng-model="query.query">
+          <label class="input-query__label" for="query"><span>Search</span></label>
+        </div>
+        <div class="button-submit">
+          <button class="btn btn--white" type='submit'>GO</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</header>
+
+<div class="wrap">
+    <h1 class="page-header">Features:</h1>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

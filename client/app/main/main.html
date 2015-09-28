@@ -1,39 +1,34 @@
-<header class="hero-unit" id="banner">
+<header class="hero-unit hero-unit--home" id="banner">
   <div ng-include="'components/navbar/navbar.html'"></div>
   <div class="hero-content wrap">
     <h1>Buy used cars with confidence.</h1>
     <form ng-submit="go()" name="search">
       <div class="radio-slide">
-        <input class="radio-slide__input" id="cta" type="radio" value="cta" name="forSale" checked>
+        <input class="radio-slide__input" id="cta" ng-model="query.vendor" type="radio" value="cta" name="forSale">
         <label class="radio-slide__label" for="cta">All</label>
-        <input class="radio-slide__input" id="cto" type="radio" value="cto" name="forSale">
+        <input class="radio-slide__input" id="cto" ng-model="query.vendor" type="radio" value="cto" name="forSale">
         <label class="radio-slide__label" for="cto">Owner</label>
-        <input class="radio-slide__input" id="ctd" type="radio" value="ctd" name="forSale">
+        <input class="radio-slide__input" id="ctd" ng-model="query.vendor" type="radio" value="ctd" name="forSale">
         <label class="radio-slide__label" for="ctd">Dealer</label>
         <span class="radio-slide__slider"></span>
       </div>
       <div class="search-inputs">
-        <ui-select ng-model="query.city">
-          <ui-select-match>{{$select.selected.pretty}}</ui-select-match>
-          <ui-select-choices group-by="groupFind" repeat="city in cities | filter: $select.search">
-              <div ng-bind-html="value.name | highlight: $select.search"></div>
-          </ui-select-choices>
-        </ui-select>
-        <!-- <input ng-class="{'filled': model.length}"
-        ng-model="model.city"
-        ng-change="filterItems(items, model)"
-        class="input-city__input" type="text" name="city" id="city" autocomplete="off">
-        <label class="input-city__label" for="city"><span>City</span></label>
-        <ul class="typeahead">
-          <li typeahead-item="city"
-          ng-repeat="city in itemsFiltered"
-          class="typeahead-item">
-            <span class="typeahead-item__state">{{ city.state }}</span>
-            <span class="typeahead-item__pretty"><span class="icon-location"></span>{{ city.pretty }}</span>
-          </li>
-        </ul> -->
+        <div class="input-city">
+          <input type="text"
+          ng-model="query.city"
+          typeahead="city as city.pretty for city in cities | filter:{pretty:$viewValue} | limitTo:5"
+          typeahead-template-url="/components/typeahead/typeahead.html"
+          typeahead-editable="false"
+          ng-class="{'filled': query.city.pretty.length}"
+          typeahead-on-select="focusNext()"
+          class="input-city__input">
+          <label class="input-city__label" for="city"><span>City</span></label>
+        </div>
         <div class="input-query">
-          <input ng-class="{'filled': query.query.length}" class="input-query__input" type="query" name="query" id="query" ng-model="query.query">
+          <input type="query"
+          ng-class="{'filled': query.query.length}"
+          ng-model="query.query"
+          class="input-query__input" name="query" id="query">
           <label class="input-query__label" for="query"><span>Search</span></label>
         </div>
         <div class="button-submit">
@@ -42,10 +37,6 @@
       </div>
     </form>
   </div>
+  <div class="decorative-triangles"></div>
 </header>
-
-<div class="wrap">
-    <h1 class="page-header">Features:</h1>
-</div>
-
-<div ng-include="'components/footer/footer.html'"></div>
+<p>{{query.city}}</p>

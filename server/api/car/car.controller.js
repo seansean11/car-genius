@@ -6,9 +6,9 @@ var request = require('request');
 // Get list of cars from CraigsList
 exports.query = function(req, res) {
   var city = req.query.city;
-  var query = encodeURIComponent(req.query.query);
-  var uri = 'http://' + city + '.craigslist.org'
-  var url = uri + '/search/cta?query=' + query;
+  var query = encodeURIComponent(req.query.q);
+  var vendor = req.query.vendor;
+  var url = city + '/search/' + vendor + '?query=' + query;
 
   console.log(url);
 
@@ -57,5 +57,6 @@ exports.query = function(req, res) {
 };
 
 function handleError(res, err) {
+  console.log(err);
   return res.send(500, err);
 }

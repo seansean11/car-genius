@@ -4,8 +4,17 @@ angular.module('carGeniusApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('search', {
-        url: '/search?city&query',
+        url: '/search?city&q&vendor',
         templateUrl: 'app/search/search.html',
-        controller: 'SearchCtrl'
+        controller: 'SearchCtrl',
+        resolve: {
+          cars: function($http, $stateParams) {
+            return $http({
+              url: '/api/cars',
+              method: 'GET',
+              params: $stateParams
+            });
+          }
+        }
       });
   });

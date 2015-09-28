@@ -4,8 +4,11 @@ angular.module('carGeniusApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
+  'ngAnimate',
+  'ngTouch',
   'ui.router',
-  'ui.select'
+  'ui.bootstrap',
+  'angular-carousel'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

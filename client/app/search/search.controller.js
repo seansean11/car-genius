@@ -1,10 +1,7 @@
 'use strict';
 
 angular.module('carGeniusApp')
-  .controller('SearchCtrl', function ($scope, $http, $stateParams) {
-    $http({ url: '/api/cars', method:'GET', params: $stateParams })
-      .success(function(cars) {
-        $scope.cars = cars;
-        console.log(cars);
-      });
+  .controller('SearchCtrl', function ($scope, cars) {
+      $scope.cars = cars.data;
+      console.log(cars.data);
   });
